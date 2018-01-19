@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MoovieProvider } from '../../providers/moovie/moovie';
+import { FilmeDetalhesPage } from '../filme-detalhes/filme-detalhes';
+import { FilmeImagensPage } from '../filme-imagens/filme-imagens';
 
 
 /**
@@ -68,6 +70,17 @@ export class FeedPage {
 
   ionViewDidEnter() {
     this.carregarFilmes();
+  }
+
+  // Abrir detalhes dos filmes
+  abrirDetalhes(filme){
+    console.log(filme);
+    this.navCtrl.push(FilmeDetalhesPage, {id: filme.id });
+  }
+  // Abrir detalhes dos filmes
+  abrirImagens(filme){
+   //console.log(filme);
+    this.navCtrl.push(FilmeImagensPage, {id: filme.id });
   }
 
   carregarFilmes(){

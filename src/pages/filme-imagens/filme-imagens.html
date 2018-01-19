@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        Filmes Similares
+      </ion-title>
+    </ion-navbar>
+  </ion-header> 
+  
+  <ion-content padding>
+      <ion-refresher (ionRefresh)="doRefresh($event)">
+          <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+      
+  <ion-card *ngFor="let imagem of imagens">
+    <ion-item>
+      <ion-avatar item-start>
+          <img [src]=" 'https://image.tmdb.org/t/p/w300/' + imagem.backdrop_path">
+      </ion-avatar>
+      <h2 class="feed-title">{{ imagem.title }}</h2>
+      <p>{{imagem.release_date}}</p>
+    </ion-item>
+  
+    <img [src]=" 'https://image.tmdb.org/t/p/w300/' + imagem.backdrop_path">
+  
+    <ion-card-content>
+      <p>{{ imagem.overview }}</p>
+    </ion-card-content>
+  
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{ imagem.vote_count }}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{imagem.comments}}</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{imagem.time_comment}}
+          
+        </ion-note>
+      </ion-col>
+    <ion-col>
+      <button ion-button item-end outline small (click)="abrirDetalhes(imagem)">Detalhes</button></ion-col>
+    </ion-row>
+   
+    
+  
+  </ion-card>
+  </ion-content>
