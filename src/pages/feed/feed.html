@@ -1,12 +1,16 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Notícias
+      Filmes Populares
     </ion-title>
   </ion-navbar>
 </ion-header> 
 
-<ion-content>
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+    
 <ion-card *ngFor="let filme of lista_filmes">
   <ion-item>
     <ion-avatar item-start>
@@ -26,7 +30,7 @@
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>{{ objeto_feed.qtd_likes }}</div>
+        <div>{{ filme.vote_count }}</div>
       </button>
     </ion-col>
     <ion-col>

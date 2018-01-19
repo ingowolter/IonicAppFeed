@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MoovieProvider } from '../../providers/moovie/moovie';
 
 
@@ -31,27 +31,65 @@ export class FeedPage {
   }
 
   public lista_filmes = new Array<any>();
+  public loader;
+  public refresher;
+  public isRefreshing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private moovieProvider: MoovieProvider
+    private moovieProvider: MoovieProvider,
+    public loadingCtrl: LoadingController
     ) {
+  }
+
+  // Carregamento
+  abreCarregando() {
+    this.loader = this.loadingCtrl.create({
+      content: "Carregando aguarde..."
+    });
+    this.loader.present();
+  }
+
+  fechaCarregando(){
+    this.loader.dismiss();
+  }
+
+  // Refresh página 
+  doRefresh(refresher) {
+    this.refresher = refresher;
+    this.isRefreshing = true;
+    this.carregarFilmes();
   }
 
   public somaDoisNumeros(num1:number, num2:number):void{
     //alert(num1+num2);
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    this.carregarFilmes();
+  }
+
+  carregarFilmes(){
+    this.abreCarregando();
     this.moovieProvider.getLastestMovies().subscribe(
       data=>{
         const response = (data as any);
         const objeto_retorno = JSON.parse(response._body)
         this.lista_filmes = objeto_retorno.results;
         console.log(objeto_retorno);
+        this.fechaCarregando();
+        if(this.isRefreshing){
+          this.refresher.complete();
+          this.isRefreshing = false;
+        }
       }, error =>{
-        console.log(error);
+        this.fechaCarregando();
+        if(this.isRefreshing){
+          this.refresher.complete();
+          this.isRefreshing = false;
+        }
+        //console.log(error);
       }
     )
   }

@@ -12,13 +12,13 @@ import { Http } from '@angular/http';
 export class MoovieProvider {
 
   private baseApiPath = "https://api.themoviedb.org/3";
-  private apiKey = "api_key=533e1063505db120f1b5ddeeb628894c";
+  private apiKey = "api_key=";
 
   constructor(public http: Http) {
     console.log('Hello MoovieProvider Provider');
   }
   getLastestMovies(){
-    return this.http.get(this.baseApiPath + "/movie/popular?&" + this.apiKey );
+    return this.http.get(this.baseApiPath + "/movie/popular?&" + this.apiKey +"&language=pt-US" );
   }
 
 }

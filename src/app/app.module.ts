@@ -8,14 +8,16 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { FeedPageModule } from '../pages/feed/feed.module';
 import { IntroPageModule } from '../pages/intro/intro.module';
-
 import { MoovieProvider } from '../providers/moovie/moovie';
-
+import { FeedPage } from '../pages/feed/feed';
+import { PerfilPageModule } from '../pages/perfil/perfil.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
+import { MenuPageModule } from '../pages/menu/menu.module';
+import { FeedPageModule } from '../pages/feed/feed.module';
+  
 @NgModule({
   declarations: [
     MyApp,
@@ -27,9 +29,12 @@ import { MoovieProvider } from '../providers/moovie/moovie';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    FeedPageModule,
     IntroPageModule,
-    HttpModule
+    HttpModule,
+    PerfilPageModule,
+    SobrePageModule, 
+    MenuPageModule,
+    FeedPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,7 +42,7 @@ import { MoovieProvider } from '../providers/moovie/moovie';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
   ],
   providers: [
     StatusBar,
